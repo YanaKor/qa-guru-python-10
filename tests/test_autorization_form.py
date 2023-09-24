@@ -1,38 +1,25 @@
-from selene import browser, be, have
-import os
+from pages.registration_page import RegistrationPage
 
 
 def test_fill_authorization_form():
-    browser.open('/automation-practice-form')
+    registration_form = RegistrationPage()
 
-    browser.element("#firstName").click().type('Yana')
-    browser.element("#lastName").type('Surname')
-    browser.element("#userEmail").type('test@ya.com')
-    browser.element("label[for='gender-radio-2']").click()
-    browser.element("#userNumber").type('89771452365')
-    browser.element("#dateOfBirthInput").click()
+    registration_form.open_form()
 
-    browser.element(".react-datepicker__year-select").type('1997').click()
-    browser.element('.react-datepicker__month-select').type('January').click()
-    browser.element('[class="react-datepicker__day react-datepicker__day--006"]').click()
+    registration_form.fill_name('Yana', 'Kormsh')
+    registration_form.fill_email('test@ya.com')
+    registration_form.select_gender_button(2)
+    registration_form.fill_mobile_number('89783646677')
+    registration_form.fill_date_of_birth('1997', 'January', '006')
+    registration_form.fill_subject_field('English')
+    registration_form.select_hobbies('3')
+    registration_form.upload_picture()
+    registration_form.fill_address('Moscow, Smolnaya street, 5')
+    registration_form.select_state('Uttar Pradesh', 'Agra')
 
-    browser.element('#subjectsInput').type('English').press_enter()
-    browser.element("label[for='hobbies-checkbox-3']").click()
-    browser.element('#uploadPicture').send_keys(os.path.abspath('resources/65NkbF_oOdw.jpg'))
-    browser.element('#currentAddress').type('Smolnaya street')
-    browser.element('#state').click()
-    browser.element('#react-select-3-input').type('Uttar Pradesh').press_enter()
-    browser.element('#react-select-4-input').type('Agra').press_enter()
+    registration_form.submit_the_form()
 
-    browser.element('#submit').should(be.visible).click()
-
-    browser.element('#example-modal-sizes-title-lg').should(have.exact_text(
-        'Thanks for submitting the form'))
-    browser.all('.table-responsive .table td:nth-child(2)').should(have.exact_texts(
-        'Yana Surname', 'test@ya.com', 'Female', '8977145236', '06 January,1997', 'English', 'Music',
-        '65NkbF_oOdw.jpg', 'Smolnaya street', 'Uttar Pradesh Agra'))
-
-
-
-
+    registration_form.check_registered_user_info('Yana Kormsh', 'test@ya.com', 'Female', '89783646677',
+                                                 '06 January,1997', 'English', 'Music', '65NkbF_oOdw.jpg',
+                                                 'Moscow, Smolnaya street, 5', 'Uttar Pradesh Agra')
 
