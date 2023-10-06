@@ -6,16 +6,16 @@ def test_fill_authorization_form():
 
     registration_form.open_form()
 
-    registration_form.fill_name('Yana', 'Kormsh')
-    registration_form.fill_email('test@ya.com')
-    registration_form.select_gender_button(2)
-    registration_form.fill_mobile_number('89783646677')
-    registration_form.fill_date_of_birth('1997', 'January', '006')
-    registration_form.fill_subject_field('English')
-    registration_form.select_hobbies('3')
-    registration_form.upload_picture()
-    registration_form.fill_address('Moscow, Smolnaya street, 5')
-    registration_form.select_state('Uttar Pradesh', 'Agra')
+    registration_form.fill_name('Yana', 'Kormsh')\
+        .fill_email('test@ya.com')\
+        .select_gender_button(2)\
+        .fill_mobile_number('89783646677')\
+        .fill_date_of_birth('1997', 'January', '6')\
+        .fill_subject_field('English')\
+        .select_hobbies('3')\
+        .upload_picture()\
+        .fill_address('Moscow, Smolnaya street, 5')\
+        .select_state('Uttar Pradesh', 'Agra')
 
     registration_form.submit_the_form()
 
